@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Button } from "./ui/button";
 import {RulerSquareIcon} from '@radix-ui/react-icons'
 
@@ -22,10 +23,10 @@ export default function Header() {
         </a>
       </div>      
       <p className="text-3xl lg:text-4xl !leading-tight mx-auto max-w-xl text-center text-slate-700 ">        
-        <h2 className="text-3xl ">Welcome to my Portfolio App.</h2>
+        <p className="text-3xl ">Welcome to my Portfolio App.</p>
        
         <Button>
-          <RulerSquareIcon className="mr-2 h-4 w-4"/> my resume
+          <RulerSquareIcon className="mr-2 h-4 w-4"/> <Link href="/portfolio">Resume v0.1</Link>
         </Button>  
       </p>
       <div className="w-full p-[1px] bg-gradient-to-r from-transparent via-foreground/10 to-transparent my-8" />
