@@ -45,14 +45,14 @@ export default async function PortfolioHome() {
           </CardHeader>
           <CardContent>
             <ul className="space-y-4">
-              {resume.jobs?.map((job: any) => (
-                <li key={job.id}>
-                  <h3 className="text-lg font-semibold">{job.position} at {job.company}</h3>
+              {resume.job?.map((j: any) => (
+                <li key={j.id}>
+                  <h3 className="text-lg font-semibold">{j.position} at {j.company}</h3>
                   <p className="text-sm text-gray-600">
-                    {new Date(job.startDate).toLocaleDateString()} - 
-                    {job.endDate ? new Date(job.endDate).toLocaleDateString() : 'Present'}
+                    {new Date(j.startDate).toLocaleDateString()} - 
+                    {j.endDate ? new Date(j.endDate).toLocaleDateString() : 'Present'}
                   </p>
-                  <p className="mt-2">{job.description}</p>
+                  <p className="mt-2">{j.description}</p>
                 </li>
               ))}
             </ul>
