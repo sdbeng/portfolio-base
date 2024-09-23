@@ -56,7 +56,7 @@ export default async function PortfolioHome() {
                       {j.enddate ? (
                         <>
                           <DateDisplay dateString={j.enddate} />
-                          (EndDate exists)
+                          
                         </>
                       ) : (
                         'Present'
