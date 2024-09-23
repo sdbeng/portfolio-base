@@ -23,7 +23,7 @@ export default function Header() {
         </a>
       </div>      
       <p className="text-3xl lg:text-4xl !leading-tight mx-auto max-w-xl text-center text-slate-700 ">        
-        <p className="text-3xl ">Welcome to my Portfolio App.</p>
+        <span className="text-3xl block">Welcome to my Portfolio App.</span>
        
         <Button>
           <RulerSquareIcon className="mr-2 h-4 w-4"/> <Link href="/portfolio">Resume v0.1</Link>
