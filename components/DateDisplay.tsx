@@ -5,11 +5,20 @@ interface DateDisplayProps {
 }
 
 export function DateDisplay({ dateString }: DateDisplayProps) {
-    console.log('dateString===', dateString)
-    if(!dateString) return <span>No date provided</span>
+    // console.log('DateDisplay received:===', dateString)
+    // console.log('DateDisplay received type:', typeof dateString)
+    if(!dateString) {
+        console.log('DateDisplay: No date provided.')
+        return <span>No date provided</span>}
 
   const date = parseISO(dateString)
-  if(!isValid(date)) return <span>Invalid date</span>
+  if(!isValid(date)) {
+    console.log('DateDisplay: Invalid date')
+    return <span>Invalid date</span>
+    }
+
+    const formattedDate = format(date, 'MMMM d, yyyy')
+//   console.log('DateDisplay: Formatted date', formattedDate)
   
-  return <time dateTime={dateString}>{format(date, 'MMMM d, yyyy')}</time>
+  return <time dateTime={dateString}>{formattedDate}</time>
 }

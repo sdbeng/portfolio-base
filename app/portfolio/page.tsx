@@ -9,7 +9,7 @@ export default async function PortfolioHome() {
     if(!resume) {
         return <div className="flex justify-center items-center h-screen">No resume info found.</div>
     }        
-    console.log('resume===', resume)
+    
     // return <div>{JSON.stringify(resume)}</div>;  
 
     return(
@@ -46,16 +46,26 @@ export default async function PortfolioHome() {
           </CardHeader>
           <CardContent>
             <ul className="space-y-4">
-              {resume.job?.map((j: any) => (
-                <li key={j.id}>
-                  <h3 className="text-lg font-semibold">{j.position} at {j.company}</h3>
-                  <p className="text-sm text-gray-600">
-                  <DateDisplay dateString={j.startdate} /> - 
-                  {j.endDate ? <DateDisplay dateString={j.enddate} /> : 'Present'}
-                  </p>
-                  <p className="mt-2">{j.description}</p>
-                </li>
-              ))}
+            {resume.jobs.map((j: any) => {
+                console.log('Job data:', JSON.stringify(j, null, 2))                
+                return (
+                  <li key={j.id}>
+                    <h3 className="text-lg font-semibold">{j.position} at {j.company}</h3>
+                    <div className="text-sm text-gray-600">
+                      <DateDisplay dateString={j.startdate} /> - 
+                      {j.enddate ? (
+                        <>
+                          <DateDisplay dateString={j.enddate} />
+                          (EndDate exists)
+                        </>
+                      ) : (
+                        'Present'
+                      )}
+                    </div>
+                    <p className="mt-2">{j.description}</p>
+                  </li>
+                )
+              })}
             </ul>
           </CardContent>
         </Card>

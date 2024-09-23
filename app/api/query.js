@@ -8,7 +8,7 @@ export async function getResume() {
     .select(
       `
       *,
-      job(*),
+      jobs(*),
       education(*)
     `
     )
@@ -18,6 +18,6 @@ export async function getResume() {
     console.error("Error fetching resume:", error);
     return null;
   }
-
+  //   console.log("Fetched data:", JSON.stringify(data, null, 2));
   return data;
 }
