@@ -7,7 +7,7 @@ export default async function PortfolioHome() {
     const resume = await getResume()
     
     if(!resume) {
-        return <div className="flex justify-center items-center h-screen">No resume info found.</div>
+        return <div className="flex justify-center items-center h-screen">No resume info found. Updating database, check in later.</div>
     }        
     
     // return <div>{JSON.stringify(resume)}</div>;  
@@ -82,7 +82,7 @@ export default async function PortfolioHome() {
                   <p>{edu.institution}</p>
                   <p className="text-sm text-gray-600">
                     {new Date(edu.startdate).toLocaleDateString()} - 
-                    {edu.endDate ? new Date(edu.enddate).toLocaleDateString() : 'Present'}
+                    {edu.enddate ? new Date(edu.enddate).toLocaleDateString() : 'Present'}
                   </p>
                 </li>
               ))}
