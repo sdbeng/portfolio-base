@@ -46,8 +46,7 @@ export default async function PortfolioHome() {
           </CardHeader>
           <CardContent>
             <ul className="space-y-4">
-            {resume.jobs.map((j: any) => {
-                console.log('Job data:', JSON.stringify(j, null, 2))                
+            {resume.jobs.map((j: any) => {                                
                 return (
                   <li key={j.id}>
                     <h3 className="text-lg font-semibold">{j.position} at {j.company}</h3>
