@@ -1,7 +1,7 @@
-import FetchDataSteps from "@/components/tutorial/fetch-data-steps";
 import { createClient } from "@/utils/supabase/server";
 import { InfoIcon } from "lucide-react";
 import { redirect } from "next/navigation";
+import PortfolioHome from "../portfolio/page";
 
 export default async function ProtectedPage() {
   const supabase = createClient();
@@ -22,6 +22,7 @@ export default async function ProtectedPage() {
           This is a protected page that you can only see as an authenticated
           user
         </div>
+        <PortfolioHome />
       </div>
       
       
