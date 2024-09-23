@@ -1,6 +1,7 @@
 import {getResume} from '@/app/api/query'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { DateDisplay } from '@/components/DateDisplay'
 
 export default async function PortfolioHome() {    
     const resume = await getResume()
@@ -49,8 +50,8 @@ export default async function PortfolioHome() {
                 <li key={j.id}>
                   <h3 className="text-lg font-semibold">{j.position} at {j.company}</h3>
                   <p className="text-sm text-gray-600">
-                    {new Date(j.startDate).toLocaleDateString()} - 
-                    {j.endDate ? new Date(j.endDate).toLocaleDateString() : 'Present'}
+                  <DateDisplay dateString={j.startdate} /> - 
+                  {j.endDate ? <DateDisplay dateString={j.enddate} /> : 'Present'}
                   </p>
                   <p className="mt-2">{j.description}</p>
                 </li>
@@ -70,8 +71,8 @@ export default async function PortfolioHome() {
                   <h3 className="text-lg font-semibold">{edu.degree} in {edu.field}</h3>
                   <p>{edu.institution}</p>
                   <p className="text-sm text-gray-600">
-                    {new Date(edu.startDate).toLocaleDateString()} - 
-                    {edu.endDate ? new Date(edu.endDate).toLocaleDateString() : 'Present'}
+                    {new Date(edu.startdate).toLocaleDateString()} - 
+                    {edu.endDate ? new Date(edu.enddate).toLocaleDateString() : 'Present'}
                   </p>
                 </li>
               ))}
