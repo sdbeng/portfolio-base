@@ -2,6 +2,8 @@ import {getResume} from '@/app/api/query'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { DateDisplay } from '@/components/DateDisplay'
+import Link from 'next/link'
+import { Button } from '@/components/ui/button'
 
 export default async function PortfolioHome() {    
     const resume = await getResume()
@@ -88,6 +90,9 @@ export default async function PortfolioHome() {
             </ul>
           </CardContent>
         </Card>
+        <Link href="/feedback" className='py-2 '>
+          <Button className="btn btn-secondary">Leave feedback</Button>
+        </Link>
         </div>
         </main>
         </>
