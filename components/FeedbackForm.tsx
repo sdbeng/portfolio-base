@@ -13,13 +13,22 @@ export default function FeedbackForm() {
 
     // Here you would typically send this data to your backend
     console.log({ name, email, feedback });
+    //save feedback to database
+    // const { data, error } = await supabase
+    //   .from('feedback')
+    //   .insert([{ name, email, feedback }]);
+    // if (error) {
+    //   console.error('Error saving feedback:', error.message);
+    //   setMessage('An error occurred while submitting your feedback.');
+    //   return;
+    // }
 
     // Clear the form
     formRef.current?.reset();
 
     // Show a success message
     setMessage('Thank you for your feedback!');
-    setTimeout(() => setMessage(''), 3000);
+    setTimeout(() => setMessage(''), 6000);
   }
 
   return (
