@@ -143,9 +143,9 @@ export default function EventCalendar() {
     
   return (
     <>
-        <div>
+        {/* <div>
             {eventsList ? (<div className='text-sm border-spacing-1 bg-orange-300 '>{JSON.stringify(eventsList)}</div>) : (<div className="flex justify-center items-center">No events found.</div>)}
-        </div>
+        </div> */}
         {error && <div className="text-amber-700 ">{error}</div>}
         {/* <div>
         <Button onClick={handleSubmitEvents}>Submit Events</Button>
