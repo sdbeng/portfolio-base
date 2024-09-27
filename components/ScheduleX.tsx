@@ -1,17 +1,20 @@
 'use client';
-import { ScheduleXCalendar, useNextCalendarApp } from "@schedule-x/react";
 import {
     createViewDay,
     createViewMonthAgenda,
     createViewMonthGrid,
     createViewWeek,
 } from "@schedule-x/calendar";
-import { createEventsServicePlugin } from "@schedule-x/events-service";
 import '@schedule-x/theme-default/dist/index.css';
-import { useEffect } from "react";
+import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop';
+import {createEventModalPlugin} from '@schedule-x/event-modal';
+import { ScheduleXCalendar, useNextCalendarApp } from "@schedule-x/react";
+import { createEventsServicePlugin } from "@schedule-x/events-service";
+import { useEffect, useState } from "react";
 
 export default function CalendarApp() {
-    const plugins = [createEventsServicePlugin()];
+    // const plugins = [createEventsServicePlugin()];
+    const eventsServicePlugin = useState(() => createEventsServicePlugin())[0];// it initializes the plugin with the default options and returns the plugin instance
 
     const calendar = useNextCalendarApp({
         views: [
@@ -34,7 +37,7 @@ export default function CalendarApp() {
                 end: "2024-09-28T18:00:00",
             }
         ],        
-    }, plugins);
+    }, [createDragAndDropPlugin(), createEventModalPlugin(),eventsServicePlugin]);
 
     useEffect(() => {
         //get all mock events
