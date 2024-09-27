@@ -23,6 +23,7 @@ export default function CalendarApp() {
             createViewMonthGrid(),
             createViewMonthAgenda(),
         ],
+        defaultView: "monthGrid",
         events: [
             {
                 id: "1",
@@ -44,8 +45,24 @@ export default function CalendarApp() {
                 start: "2024-10-06T11:00:00",
                 end: "2024-10-06T11:00:00",
                 people: ["Silvia", "Sergio"],
+                calendarId: 'mediagroup',
             },
-        ],        
+        ],
+        calendars: {
+            mediagroup: {
+                colorName: 'mediagroup',
+                lightColors: {
+                    main: '#1c7df9',
+                    container: "#d2e7ff",
+                    onContainer: "#002859",
+                },
+                darkColors: {
+                main: "#c0dfff",
+                container: "#dee6ff",
+                onContainer: "#426aa2",
+                },
+            },
+        }        
     }, [createDragAndDropPlugin(), createEventModalPlugin(),eventsServicePlugin]);
 
     useEffect(() => {
