@@ -26,18 +26,25 @@ export default function CalendarApp() {
         events: [
             {
                 id: "1",
-                title: "11am mass",
-                start: "2024-09-28T11:00:00",
-                end: "2024-09-28T12:00:00",
-                people: ["John Wintersx"],
+                title: "John W. - media @mass",
+                start: "2024-09-28T07:00:00",
+                end: "2024-09-28T08:00:00",
+                people: ["John Winters"],
             },
             {
                 id: "2",
-                title: "5pm mass",
-                start: "2024-09-28T17:00:00",
-                end: "2024-09-28T18:00:00",
-                people: ["Virginia Fallx"],
-            }
+                title: "Silvia/Sergio - media @mass",
+                start: "2024-09-29T11:00:00",
+                end: "2024-09-29T11:00:00",
+                people: ["Silvia", "Sergio"],
+            },
+            {
+                id: "3",
+                title: "Silvia/Sergio - media @mass",
+                start: "2024-10-06T11:00:00",
+                end: "2024-10-06T11:00:00",
+                people: ["Silvia", "Sergio"],
+            },
         ],        
     }, [createDragAndDropPlugin(), createEventModalPlugin(),eventsServicePlugin]);
 
