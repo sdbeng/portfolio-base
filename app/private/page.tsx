@@ -1,5 +1,6 @@
 import { redirect } from 'next/navigation';
 import { createClient } from '@/utils/supabase/server';
+import ScheduleX from '@/components/ScheduleX';
 
 export default async function ProtectedPage() {
   const supabase = createClient();
@@ -13,6 +14,7 @@ export default async function ProtectedPage() {
     return (
         <div>
             <h1>Protected Page - private</h1>
+            <ScheduleX />
         </div>
     );
 }
