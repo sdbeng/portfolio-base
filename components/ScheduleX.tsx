@@ -29,12 +29,14 @@ export default function CalendarApp() {
                 title: "11am mass",
                 start: "2024-09-28T11:00:00",
                 end: "2024-09-28T12:00:00",
+                people: ["John Wintersx"],
             },
             {
                 id: "2",
                 title: "5pm mass",
                 start: "2024-09-28T17:00:00",
                 end: "2024-09-28T18:00:00",
+                people: ["Virginia Fallx"],
             }
         ],        
     }, [createDragAndDropPlugin(), createEventModalPlugin(),eventsServicePlugin]);
