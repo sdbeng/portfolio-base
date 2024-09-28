@@ -1,5 +1,9 @@
 'use client';
 import {
+    viewDay,
+    viewMonthAgenda,
+    viewMonthGrid,
+    viewWeek,
     createViewDay,
     createViewMonthAgenda,
     createViewMonthGrid,
@@ -10,11 +14,12 @@ import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop';
 import {createEventModalPlugin} from '@schedule-x/event-modal';
 import { ScheduleXCalendar, useNextCalendarApp } from "@schedule-x/react";
 import { createEventsServicePlugin } from "@schedule-x/events-service";
+import { createResizePlugin } from '@schedule-x/resize'
 import { useEffect, useState } from "react";
 
 export default function CalendarApp() {
     // const plugins = [createEventsServicePlugin()];
-    const eventsServicePlugin = useState(() => createEventsServicePlugin())[0];// it initializes the plugin with the default options and returns the plugin instance
+    const eventsServicePlugin = useState(() => createEventsServicePlugin())[0];
 
     const calendar = useNextCalendarApp({
         views: [
@@ -22,30 +27,47 @@ export default function CalendarApp() {
             createViewWeek(),
             createViewMonthGrid(),
             createViewMonthAgenda(),
+            // viewDay,
+            // viewWeek,
+            // viewMonthGrid,
+            // viewMonthAgenda,
         ],
-        defaultView: "monthGrid",
+        selectedDate: '2024-09-28',
+        // defaultView: viewMonthGrid.name,
         events: [
             {
                 id: "1",
-                title: "John W. - media @mass",
-                start: "2024-09-28T07:00:00",
-                end: "2024-09-28T08:00:00",
+                title: "John W. - media",
+                start: "2024-09-28 09:00",
+                end: "2024-09-28 10:00",
                 people: ["John Winters"],
             },
             {
                 id: "2",
-                title: "Silvia/Sergio - media @mass",
-                start: "2024-09-29T11:00:00",
-                end: "2024-09-29T11:00:00",
+                title: "Silvia/Sergio - media",
+                description:"Media remote ctrl required",
+                start: "2024-09-29 11:00",
+                end: "2024-09-29 11:00",
                 people: ["Silvia", "Sergio"],
+                color: "green",
+                // isEditable: true,
+                calendarId: 'mediagroup',
             },
             {
                 id: "3",
-                title: "Silvia/Sergio - media @mass",
-                start: "2024-10-06T11:00:00",
-                end: "2024-10-06T11:00:00",
+                title: "Silvia/Sergio - media",
+                start: "2024-10-06 11:00",
+                end: "2024-10-06 11:00",
                 people: ["Silvia", "Sergio"],
                 calendarId: 'mediagroup',
+            },
+            {
+                id: "4",
+                title: "Effie - media",
+                start: "2024-10-12 17:00",
+                end: "2024-10-12 18:00",
+                people: ["Effie"],
+                calendarId: 'testgroup',
             },
         ],
         calendars: {
@@ -62,30 +84,37 @@ export default function CalendarApp() {
                 onContainer: "#426aa2",
                 },
             },
-        }        
-    }, [createDragAndDropPlugin(), createEventModalPlugin(),eventsServicePlugin]);
+        },
+        plugins: [
+            createDragAndDropPlugin(),
+            createEventModalPlugin(),
+            eventsServicePlugin,
+            createResizePlugin(),
+        ],       
+    }, );
 
-    useEffect(() => {
-        //get all mock events
+    useEffect(() => {        
         console.log('calendar instance===', JSON.stringify(calendar))
-        calendar?.eventsService?.getAll();
-        // calendar?.eventsService?.fetchEvents();
-        // .then((events) => {
-        //     console.log('LOG fetcher data===', JSON.stringify(events))
+        calendar?.eventsService.getAll();
+        // eventsServicePlugin.$app.config.weekOptions = {
+        //     // @ts-ignore
+        //     showWeekend: true,
+        //     showWeekNumber: true,
+        //     showCurrentTime: true,
+        //     startDay: 7, // Sunday//not setting Sunday as first day of the week 
         // }
-        //get all events from the database
-        // const events = await getEventsJson();
-        // console.log('LOG fetcher data===', JSON.stringify(events))
-        // const parsedData = JSON.parse(events);
-        // console.log('LOG fetcher PARSED data===', JSON.stringify(parsedData))
-        // setEventsList(parsedData);
-
-        // setView("monthGrid");
+        
     }, []);
 
+    //close the modal programmatically
+    // const closeModal = () => {
+    //     calendar?.eventModal?.close();
+    // }
+    
+
     return (
-        <div>
-        <ScheduleXCalendar calendarApp={calendar} />
+        <div>            
+            <ScheduleXCalendar calendarApp={calendar} />
         </div>
     );
 }
