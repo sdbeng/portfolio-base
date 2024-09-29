@@ -21,13 +21,15 @@ export default function CalendarApp() {
     // const plugins = [createEventsServicePlugin()];
     const eventsServicePlugin = useState(() => createEventsServicePlugin())[0];
 
+    // Note:Schedule-X only supports time stamps in the form of YYYY-MM-DD or YYYY-MM-DD hh:mm, not the seconds
+
     const calendar = useNextCalendarApp({
         views: [
             createViewDay(),
             createViewWeek(),
             createViewMonthGrid(),
             createViewMonthAgenda(),
-            // viewDay,
+            // viewDay,//old api for views
             // viewWeek,
             // viewMonthGrid,
             // viewMonthAgenda,
@@ -45,29 +47,85 @@ export default function CalendarApp() {
             {
                 id: "2",
                 title: "Silvia/Sergio - media",
-                description:"Media remote ctrl required",
+                // description:"Media remote ctrl required",
                 start: "2024-09-29 11:00",
                 end: "2024-09-29 11:00",
                 people: ["Silvia", "Sergio"],
-                color: "green",
+                // color: "green",
                 // isEditable: true,
                 calendarId: 'mediagroup',
             },
             {
                 id: "3",
-                title: "Silvia/Sergio - media",
+                title: "Andrew - media",
                 start: "2024-10-06 11:00",
                 end: "2024-10-06 11:00",
-                people: ["Silvia", "Sergio"],
+                people: ["Andrew"],
                 calendarId: 'mediagroup',
             },
             {
                 id: "4",
+                title: "Eileen,Ariel,Lucy - media",
+                start: "2024-10-05 17:00",
+                end: "2024-10-05 18:00",
+                people: ["Eileen,Ariel,Lucy"],
+                calendarId: 'saturdaygroup',
+            },
+            {
+                id: "5",
                 title: "Effie - media",
+                start: "2024-10-13 07:00",
+                end: "2024-10-13 08:00",
+                people: ["Effie"],
+                calendarId: 'sun7amgroup',
+            },
+            {
+                id: "6",
+                title: "Ace,Darrel - media",
                 start: "2024-10-12 17:00",
                 end: "2024-10-12 18:00",
-                people: ["Effie"],
-                calendarId: 'testgroup',
+                people: ["Ace","Darrel"],
+                calendarId: 'saturdaygroup',
+            },
+            {
+                id: "7",
+                title: "Lucy,Darrel - media",
+                start: "2024-10-19 17:00",
+                end: "2024-10-19 18:00",
+                people: ["Lucy","Darrel"],
+                calendarId: 'saturdaygroup',
+            },
+            {
+                id: "8",
+                title: "Jon(Sylvia) - media",
+                start: "2024-10-26 17:00",
+                end: "2024-10-26 18:00",
+                people: ["Jon(Sylvia)"],
+                calendarId: 'saturdaygroup',
+            },
+            {
+                id: "9",
+                title: "Evelyn/Oscar - media",
+                start: "2024-10-06 07:00",
+                end: "2024-10-06 08:00",
+                people: ["Evelyn/Oscar"],
+                calendarId: 'sun7amgroup',
+            },
+            {
+                id: "10",
+                title: "Marina - media",
+                start: "2024-10-06 09:00",
+                end: "2024-10-06 10:00",
+                people: ["Marina"],
+                calendarId: 'sun9amgroup',
+            },
+            {
+                id: "11",
+                title: "volunteer - media",
+                start: "2024-10-06 17:00",
+                end: "2024-10-06 18:00",
+                people: ["volunteer"],
+                calendarId: 'sun5pmgroup',
             },
         ],
         calendars: {
@@ -82,6 +140,19 @@ export default function CalendarApp() {
                 main: "#c0dfff",
                 container: "#dee6ff",
                 onContainer: "#426aa2",
+                },
+            },
+            saturdaygroup: {
+                colorName: 'saturdaygroup',
+                lightColors: {
+                    main: 'yellow',
+                    container: "#000",
+                    onContainer: "#ddd",
+                },
+                    darkColors: {
+                    main: "#c0dfff",
+                    container: "#dee6ff",
+                    onContainer: "#426aa2",
                 },
             },
         },
