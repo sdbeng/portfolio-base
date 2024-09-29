@@ -19,7 +19,7 @@ import { useEffect, useState } from "react";
 
 export default function CalendarApp() {
     // const plugins = [createEventsServicePlugin()];
-    const eventsServicePlugin = useState(() => createEventsServicePlugin())[0];
+    const eventsService = useState(() => createEventsServicePlugin())[0];
 
     // Note:Schedule-X only supports time stamps in the form of YYYY-MM-DD or YYYY-MM-DD hh:mm, not the seconds
 
@@ -159,7 +159,7 @@ export default function CalendarApp() {
         plugins: [
             createDragAndDropPlugin(),
             createEventModalPlugin(),
-            eventsServicePlugin,
+            eventsService,
             createResizePlugin(),
         ],       
     }, );
@@ -167,13 +167,28 @@ export default function CalendarApp() {
     useEffect(() => {        
         console.log('calendar instance===', JSON.stringify(calendar))
         calendar?.eventsService.getAll();
-        // eventsServicePlugin.$app.config.weekOptions = {
-        //     // @ts-ignore
-        //     showWeekend: true,
-        //     showWeekNumber: true,
-        //     showCurrentTime: true,
-        //     startDay: 7, // Sunday//not setting Sunday as first day of the week 
-        // }
+        //call set(events) to set all events in the calendar, override existing events with the new ones you pass it
+        // calendar?.eventsService.set(events);
+
+        // calendar.eventsService.add({
+        //     title: 'Event 1',
+        //     start: '2024-04-20',
+        //     end: '2024-04-20',
+        //     id: 1
+        //   })
+           
+        //   calendar.eventsService.get(1) // { title: 'Event 1', start: '2024-04-20', end: '2024-04-20', id: 1 }
+           
+        //   calendar.eventsService.getAll() // [{ title: 'Event 1', start: '2024-04-20', end: '2024-04-20', id: 1 }]
+           
+        //   calendar.eventsService.update({
+        //     title: 'Real title',
+        //     start: '2024-04-20',
+        //     end: '2024-04-20',
+        //     id: 1
+        //   })
+           
+        //   calendar.eventsService.remove(1)
         
     }, []);
 
