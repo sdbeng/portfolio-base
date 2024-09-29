@@ -16,10 +16,12 @@ import { ScheduleXCalendar, useNextCalendarApp } from "@schedule-x/react";
 import { createEventsServicePlugin } from "@schedule-x/events-service";
 import { createResizePlugin } from '@schedule-x/resize'
 import { useEffect, useState } from "react";
+import fetchEventsDB from "@/utils/fetcheventsdb";
 
 export default function CalendarApp() {
     // const plugins = [createEventsServicePlugin()];
-    const eventsService = useState(() => createEventsServicePlugin())[0];
+    const eventsService = createEventsServicePlugin();
+    // const eventsService = useState(() => createEventsServicePlugin())[0];
 
     // Note:Schedule-X only supports time stamps in the form of YYYY-MM-DD or YYYY-MM-DD hh:mm, not the seconds
 
@@ -166,8 +168,11 @@ export default function CalendarApp() {
 
     useEffect(() => {        
         console.log('calendar instance===', JSON.stringify(calendar))
-        calendar?.eventsService.getAll();
+        // calendar?.eventsService.getAll();
         //call set(events) to set all events in the calendar, override existing events with the new ones you pass it
+        console.log('-----------------')
+        console.log('Useff fetching data from supabase...')
+        fetcher();
         // calendar?.eventsService.set(events);
 
         // calendar.eventsService.add({
@@ -191,6 +196,23 @@ export default function CalendarApp() {
         //   calendar.eventsService.remove(1)
         
     }, []);
+
+    const fetcher = async () => {
+        //note: might not need to use try-catching here\
+        try {
+            const data = await fetchEventsDB();
+            console.log('LOG fetcher data===', JSON.stringify(data))
+            if (Array.isArray(data)) {
+                eventsService.set(data);
+            } else {
+                console.error('Fetched data is not an array of events:', data);
+            }
+            // const parsedData = JSON.parse(data);
+            // console.log('LOG fetcher PARSED data===', JSON.stringify(parsedData))
+        }catch(error) {
+            console.log('LOG fetcher - error fetching evnets===', error)
+        }
+    }
 
     //close the modal programmatically
     // const closeModal = () => {
