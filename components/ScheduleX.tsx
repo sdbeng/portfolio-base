@@ -172,8 +172,7 @@ export default function CalendarApp() {
         //call set(events) to set all events in the calendar, override existing events with the new ones you pass it
         console.log('-----------------')
         console.log('Useff fetching data from supabase...')
-        fetcher();
-        // calendar?.eventsService.set(events);
+        fetcher();        
 
         // calendar.eventsService.add({
         //     title: 'Event 1',
@@ -182,10 +181,8 @@ export default function CalendarApp() {
         //     id: 1
         //   })
            
-        //   calendar.eventsService.get(1) // { title: 'Event 1', start: '2024-04-20', end: '2024-04-20', id: 1 }
-           
-        //   calendar.eventsService.getAll() // [{ title: 'Event 1', start: '2024-04-20', end: '2024-04-20', id: 1 }]
-           
+        //   calendar.eventsService.get(1) // { title: 'Event 1', start: '2024-04-20', end: '2024-04-20', id: 1 } 
+                 
         //   calendar.eventsService.update({
         //     title: 'Real title',
         //     start: '2024-04-20',
@@ -197,11 +194,10 @@ export default function CalendarApp() {
         
     }, []);
 
-    const fetcher = async () => {
-        //note: might not need to use try-catching here\
+    const fetcher = async () => {        
         try {
             const data = await fetchEventsDB();
-            console.log('LOG fetcher data===', JSON.stringify(data))
+            // console.log('LOG fetcher data===', JSON.stringify(data))
             if (Array.isArray(data)) {
                 eventsService.set(data);
             } else {
@@ -213,6 +209,14 @@ export default function CalendarApp() {
             console.log('LOG fetcher - error fetching evnets===', error)
         }
     }
+    //this is done on the server side
+    // const transformEventData = (events) => {
+    //     return events.map(event => ({
+    //         ...event,
+    //         calendarId: event.calendar_id,
+    //         // people: Array.isArray(event.people) ? event.people : [],
+    //     }));
+    // };
 
     //close the modal programmatically
     // const closeModal = () => {

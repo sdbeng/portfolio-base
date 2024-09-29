@@ -7,6 +7,11 @@ export default async function fetchEventsDB() {
         console.log('error', error);
         return error;
     }
-
-    return data;
+    //iterate over the data and set the calendar_id to calendarId as the calendar signature expects it
+    return data.map(event => ({
+        ...event,
+        calendarId: event.calendar_id,
+    }))
+    
+    // return data;
 }
