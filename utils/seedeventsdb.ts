@@ -1,4 +1,5 @@
 // removed the id props for insertion into db, otherwise will need them for seed
+// NOTE: the people field must be and array of strings - see function definition
 export const eventsdb = [
     {        
         title: "John W. - media",
