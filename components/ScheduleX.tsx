@@ -16,7 +16,6 @@ import { ScheduleXCalendar, useNextCalendarApp } from "@schedule-x/react";
 import { createEventsServicePlugin } from "@schedule-x/events-service";
 import { createResizePlugin } from '@schedule-x/resize'
 import { useEffect, useState } from "react";
-import fetchEventsDB from "@/utils/fetcheventsdb";
 
 export default function CalendarApp() {
     // const plugins = [createEventsServicePlugin()];
@@ -183,8 +182,20 @@ export default function CalendarApp() {
         // calendar?.eventsService.getAll();
         //call set(events) to set all events in the calendar, override existing events with the new ones you pass it
         console.log('-----------------')
-        console.log('Useff fetching data from supabase...')
-        fetcher();        
+        console.log('Useff NEW fetching data from supabase...')
+        const fetchEvents = async () => {
+            try {
+                const response = await fetch('/api/events');
+                if(!response.ok) {
+                    throw new Error('Failed to fetch events');
+                }
+                const data = await response.json();
+                eventsService.set(data);
+            }catch(error) {
+                console.error('Error fetching events:', error);
+            }
+        }
+        fetchEvents();        
 
         // calendar.eventsService.add({
         //     title: 'Event 1',
@@ -206,21 +217,25 @@ export default function CalendarApp() {
         
     }, []);
 
-    const fetcher = async () => {        
-        try {
-            const data = await fetchEventsDB();
-            // console.log('LOG fetcher data===', JSON.stringify(data))
-            if (Array.isArray(data)) {
-                eventsService.set(data);
-            } else {
-                console.error('Fetched data is not an array of events:', data);
-            }
-            // const parsedData = JSON.parse(data);
-            // console.log('LOG fetcher PARSED data===', JSON.stringify(parsedData))
-        }catch(error) {
-            console.log('LOG fetcher - error fetching evnets===', error)
-        }
+    if (!calendar) {
+        return <div className="text-green-300 ">Loading...</div>;
     }
+
+    // const fetcher = async () => {        
+    //     try {
+    //         const data = await fetchEventsDB();
+    //         // console.log('LOG fetcher data===', JSON.stringify(data))
+    //         if (Array.isArray(data)) {
+    //             eventsService.set(data);
+    //         } else {
+    //             console.error('Fetched data is not an array of events:', data);
+    //         }
+    //         // const parsedData = JSON.parse(data);
+    //         // console.log('LOG fetcher PARSED data===', JSON.stringify(parsedData))
+    //     }catch(error) {
+    //         console.log('LOG fetcher - error fetching evnets===', error)
+    //     }
+    // }
     //this is done on the server side
     // const transformEventData = (events) => {
     //     return events.map(event => ({
