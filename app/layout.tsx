@@ -15,7 +15,7 @@ const defaultUrl = process.env.VERCEL_URL
 export const metadata = {
   metadataBase: new URL(defaultUrl),
   title: "Portfolio Builder App",
-  description: "Highlight my work and skills with a portfolio builder app",
+  description: "Highlight my work and skills with a portfolio builder and protected calendar app",
 };
 
 export default function RootLayout({
@@ -51,16 +51,19 @@ export default function RootLayout({
 
               <footer className="w-full flex items-center justify-center border-t mx-auto text-center text-xs gap-8 py-16">
                 <p>
-                  Powered by{" "}
+                  © 2024- Sergio Barrera Copyrights - Created with ❤️ by{" "}
                   <a
                     href="/"
                     target="_blank"
                     className="font-bold hover:underline"
                     rel="noreferrer"
                   >
-                    SergB
+                    SergioB
                   </a>
                 </p>
+                  <Link href="http://twitter.com/sergb_appdev">
+                  Connect with me on Twitter
+                  </Link>
                 <ThemeSwitcher />
               </footer>
             </div>
