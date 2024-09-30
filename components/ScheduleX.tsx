@@ -16,10 +16,13 @@ import { ScheduleXCalendar, useNextCalendarApp } from "@schedule-x/react";
 import { createEventsServicePlugin } from "@schedule-x/events-service";
 import { createResizePlugin } from '@schedule-x/resize'
 import { useEffect, useState } from "react";
+import fetchEventsDB from "@/utils/fetcheventsdb";
 
 export default function CalendarApp() {
     // const plugins = [createEventsServicePlugin()];
-    const eventsService = useState(() => createEventsServicePlugin())[0];
+    const eventsService = createEventsServicePlugin();
+    // const eventsService = useState(() => createEventsServicePlugin())[0];
+    const viewMonthGrid = createViewMonthGrid();
 
     // Note:Schedule-X only supports time stamps in the form of YYYY-MM-DD or YYYY-MM-DD hh:mm, not the seconds
 
@@ -28,14 +31,26 @@ export default function CalendarApp() {
             createViewDay(),
             createViewWeek(),
             createViewMonthGrid(),
-            createViewMonthAgenda(),
-            // viewDay,//old api for views
-            // viewWeek,
-            // viewMonthGrid,
-            // viewMonthAgenda,
+            createViewMonthAgenda(),            
         ],
-        selectedDate: '2024-09-28',
-        // defaultView: viewMonthGrid.name,
+        selectedDate: '2024-09-29',
+        firstDayOfWeek: 0,//0 is Sunday, 1 is Monday
+        defaultView: viewMonthGrid.name,
+        dayBoundaries: {
+            start: '06:00',
+            end: '22:00',
+        },
+        weekOptions: {
+            eventWidth: 95,//leave small right margin
+        },
+        callbacks: {
+            onClickDate(date) {
+                console.log('onClickDate', date)
+            },
+            onEventClick(event) {
+                console.log('onEventClick', event)
+            },
+        },
         events: [
             {
                 id: "1",
@@ -145,9 +160,9 @@ export default function CalendarApp() {
             saturdaygroup: {
                 colorName: 'saturdaygroup',
                 lightColors: {
-                    main: 'yellow',
-                    container: "#000",
-                    onContainer: "#ddd",
+                    main: '#f91c45',
+                    container: '#ffd2dc',
+                    onContainer: '#59000d',
                 },
                     darkColors: {
                     main: "#c0dfff",
@@ -164,11 +179,12 @@ export default function CalendarApp() {
         ],       
     }, );
 
-    useEffect(() => {        
-        console.log('calendar instance===', JSON.stringify(calendar))
-        calendar?.eventsService.getAll();
+    useEffect(() => {
+        // calendar?.eventsService.getAll();
         //call set(events) to set all events in the calendar, override existing events with the new ones you pass it
-        // calendar?.eventsService.set(events);
+        console.log('-----------------')
+        console.log('Useff fetching data from supabase...')
+        fetcher();        
 
         // calendar.eventsService.add({
         //     title: 'Event 1',
@@ -177,10 +193,8 @@ export default function CalendarApp() {
         //     id: 1
         //   })
            
-        //   calendar.eventsService.get(1) // { title: 'Event 1', start: '2024-04-20', end: '2024-04-20', id: 1 }
-           
-        //   calendar.eventsService.getAll() // [{ title: 'Event 1', start: '2024-04-20', end: '2024-04-20', id: 1 }]
-           
+        //   calendar.eventsService.get(1) // { title: 'Event 1', start: '2024-04-20', end: '2024-04-20', id: 1 } 
+                 
         //   calendar.eventsService.update({
         //     title: 'Real title',
         //     start: '2024-04-20',
@@ -191,6 +205,30 @@ export default function CalendarApp() {
         //   calendar.eventsService.remove(1)
         
     }, []);
+
+    const fetcher = async () => {        
+        try {
+            const data = await fetchEventsDB();
+            // console.log('LOG fetcher data===', JSON.stringify(data))
+            if (Array.isArray(data)) {
+                eventsService.set(data);
+            } else {
+                console.error('Fetched data is not an array of events:', data);
+            }
+            // const parsedData = JSON.parse(data);
+            // console.log('LOG fetcher PARSED data===', JSON.stringify(parsedData))
+        }catch(error) {
+            console.log('LOG fetcher - error fetching evnets===', error)
+        }
+    }
+    //this is done on the server side
+    // const transformEventData = (events) => {
+    //     return events.map(event => ({
+    //         ...event,
+    //         calendarId: event.calendar_id,
+    //         // people: Array.isArray(event.people) ? event.people : [],
+    //     }));
+    // };
 
     //close the modal programmatically
     // const closeModal = () => {

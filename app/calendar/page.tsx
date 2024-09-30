@@ -5,7 +5,7 @@ export function CalendarPage () {
   return (
     <div>
       <h1>St Agnes Calendar - media volunteers</h1>
-      <EventCalendar />
+      {/* <EventCalendar /> */}
     </div>
   );
 };

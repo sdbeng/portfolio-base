@@ -1,0 +1,80 @@
+// removed the id props for insertion into db, otherwise will need them for seed
+// NOTE: the people field must be and array of strings - see function definition
+export const eventsdb = [
+    {        
+        title: "John W. - media",
+        start: "2024-09-28 09:00",
+        end: "2024-09-28 10:00",
+        people: ["John Winters"],
+    },
+    {        
+        title: "Sergio - seeddb",        
+        start: "2024-09-29 11:00",
+        end: "2024-09-29 11:00",
+        people: ["Silvia", "Sergio"],        
+        calendarId: 'mediagroup',
+    },
+    {        
+        title: "Andrew - seeddb",
+        start: "2024-10-06 11:00",
+        end: "2024-10-06 11:00",
+        people: ["Andrew"],
+        calendarId: 'mediagroup',
+    },
+    {        
+        title: "Eileen,Ariel,Lucy - seeddb",
+        start: "2024-10-05 17:00",
+        end: "2024-10-05 18:00",
+        people: ["Eileen,Ariel,Lucy"],
+        calendarId: 'saturdaygroup',
+    },
+    {        
+        title: "Effie - media",
+        start: "2024-10-13 07:00",
+        end: "2024-10-13 08:00",
+        people: ["Effie"],
+        calendarId: 'sun7amgroup',
+    },
+    {        
+        title: "Ace,Darrel - media",
+        start: "2024-10-12 17:00",
+        end: "2024-10-12 18:00",
+        people: ["Ace","Darrel"],
+        calendarId: 'saturdaygroup',
+    },
+    {        
+        title: "Lucy,Darrel - media",
+        start: "2024-10-19 17:00",
+        end: "2024-10-19 18:00",
+        people: ["Lucy","Darrel"],
+        calendarId: 'saturdaygroup',
+    },
+    {        
+        title: "Jon(Sylvia) - media",
+        start: "2024-10-26 17:00",
+        end: "2024-10-26 18:00",
+        people: ["Jon(Sylvia)"],
+        calendarId: 'saturdaygroup',
+    },
+    {        
+        title: "Evelyn/Oscar - media",
+        start: "2024-10-06 07:00",
+        end: "2024-10-06 08:00",
+        people: ["Evelyn/Oscar"],
+        calendarId: 'sun7amgroup',
+    },
+    {        
+        title: "Marina - media",
+        start: "2024-10-06 09:00",
+        end: "2024-10-06 10:00",
+        people: ["Marina"],
+        calendarId: 'sun9amgroup',
+    },
+    {        
+        title: "volunteer - media",
+        start: "2024-10-06 17:00",
+        end: "2024-10-06 18:00",
+        people: ["volunteer"],
+        calendarId: 'sun5pmgroup',
+    },
+]
