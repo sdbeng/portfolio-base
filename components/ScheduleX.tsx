@@ -178,11 +178,8 @@ export default function CalendarApp() {
         ],       
     }, );
 
-    useEffect(() => {
-        // calendar?.eventsService.getAll();
-        //call set(events) to set all events in the calendar, override existing events with the new ones you pass it
-        console.log('-----------------')
-        console.log('Useff NEW fetching data from supabase...')
+    useEffect(() => {        
+        //call set(events) to set all events in the calendar, override existing events with the new ones you pass it        
         const fetchEvents = async () => {
             try {
                 const response = await fetch('/api/events');
@@ -218,38 +215,8 @@ export default function CalendarApp() {
     }, []);
 
     if (!calendar) {
-        return <div className="text-green-300 ">Loading...</div>;
+        return <div className="text-green-300 text-center">Loading...</div>;
     }
-
-    // const fetcher = async () => {        
-    //     try {
-    //         const data = await fetchEventsDB();
-    //         // console.log('LOG fetcher data===', JSON.stringify(data))
-    //         if (Array.isArray(data)) {
-    //             eventsService.set(data);
-    //         } else {
-    //             console.error('Fetched data is not an array of events:', data);
-    //         }
-    //         // const parsedData = JSON.parse(data);
-    //         // console.log('LOG fetcher PARSED data===', JSON.stringify(parsedData))
-    //     }catch(error) {
-    //         console.log('LOG fetcher - error fetching evnets===', error)
-    //     }
-    // }
-    //this is done on the server side
-    // const transformEventData = (events) => {
-    //     return events.map(event => ({
-    //         ...event,
-    //         calendarId: event.calendar_id,
-    //         // people: Array.isArray(event.people) ? event.people : [],
-    //     }));
-    // };
-
-    //close the modal programmatically
-    // const closeModal = () => {
-    //     calendar?.eventModal?.close();
-    // }
-    
 
     return (
         <div>            
