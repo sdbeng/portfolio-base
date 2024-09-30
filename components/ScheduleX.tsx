@@ -22,6 +22,7 @@ export default function CalendarApp() {
     // const plugins = [createEventsServicePlugin()];
     const eventsService = createEventsServicePlugin();
     // const eventsService = useState(() => createEventsServicePlugin())[0];
+    const viewMonthGrid = createViewMonthGrid();
 
     // Note:Schedule-X only supports time stamps in the form of YYYY-MM-DD or YYYY-MM-DD hh:mm, not the seconds
 
@@ -30,14 +31,26 @@ export default function CalendarApp() {
             createViewDay(),
             createViewWeek(),
             createViewMonthGrid(),
-            createViewMonthAgenda(),
-            // viewDay,//old api for views
-            // viewWeek,
-            // viewMonthGrid,
-            // viewMonthAgenda,
+            createViewMonthAgenda(),            
         ],
-        selectedDate: '2024-09-28',
-        // defaultView: viewMonthGrid.name,
+        selectedDate: '2024-09-29',
+        firstDayOfWeek: 0,//0 is Sunday, 1 is Monday
+        defaultView: viewMonthGrid.name,
+        dayBoundaries: {
+            start: '06:00',
+            end: '22:00',
+        },
+        weekOptions: {
+            eventWidth: 95,//leave small right margin
+        },
+        callbacks: {
+            onClickDate(date) {
+                console.log('onClickDate', date)
+            },
+            onEventClick(event) {
+                console.log('onEventClick', event)
+            },
+        },
         events: [
             {
                 id: "1",
@@ -147,9 +160,9 @@ export default function CalendarApp() {
             saturdaygroup: {
                 colorName: 'saturdaygroup',
                 lightColors: {
-                    main: 'yellow',
-                    container: "#000",
-                    onContainer: "#ddd",
+                    main: '#f91c45',
+                    container: '#ffd2dc',
+                    onContainer: '#59000d',
                 },
                     darkColors: {
                     main: "#c0dfff",
@@ -166,8 +179,7 @@ export default function CalendarApp() {
         ],       
     }, );
 
-    useEffect(() => {        
-        console.log('calendar instance===', JSON.stringify(calendar))
+    useEffect(() => {
         // calendar?.eventsService.getAll();
         //call set(events) to set all events in the calendar, override existing events with the new ones you pass it
         console.log('-----------------')
